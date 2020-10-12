@@ -1,11 +1,17 @@
 package com.example.androidgenericrecyclerviewexample.model;
 
+import com.example.androidgenericrecyclerviewexample.adapter.ItemInnerListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Model {
 
     private int id;
     private String name;
     private String type;
     private boolean isExpended;
+    private List<InnerListModel> innerListModels = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -37,5 +43,13 @@ public class Model {
 
     public void setExpended(boolean expended) {
         isExpended = expended;
+    }
+
+    public List<InnerListModel> getInnerListModels() {
+        return innerListModels;
+    }
+
+    public void setInnerListModels(List<InnerListModel> innerListModels) {
+        this.innerListModels = innerListModels;
     }
 }

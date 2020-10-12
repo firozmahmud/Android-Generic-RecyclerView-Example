@@ -101,13 +101,17 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (model.isExpended()) {
             binding.indicator.setImageResource(R.drawable.arrow_down);
             // init another recyclerview and list
+            binding.rvInnerRecycler.setVisibility(View.VISIBLE);
+            ItemInnerListAdapter itemInnerListAdapter = new ItemInnerListAdapter(context, model.getInnerListModels());
+            binding.rvInnerRecycler.setAdapter(itemInnerListAdapter);
         } else {
             binding.indicator.setImageResource(R.drawable.arrow_right);
             // close inner recyclerview and list
+            binding.rvInnerRecycler.setVisibility(View.GONE);
         }
 
 
-        binding.getRoot().setOnClickListener(new View.OnClickListener() {
+        binding.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -119,9 +123,9 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                     model.setExpended(isExpanded);
 
-                    notifyItemChanged(position);
-
                     itemClick.itemClick(model);
+
+                    notifyItemChanged(position);
                 }
             }
         });
@@ -133,7 +137,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         binding.tvTitle.setText(model.getName());
 
 
-        binding.getRoot().setOnClickListener(new View.OnClickListener() {
+        binding.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (itemClick != null) {
